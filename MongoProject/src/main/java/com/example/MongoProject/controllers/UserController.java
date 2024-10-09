@@ -1,4 +1,4 @@
-package com.example.MongoProject.controllers
+package com.example.MongoProject.controllers;
 
 import java.util.Optional;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.UserModel;
-import com.example.demo.repository.UserRepository;
+import com.example.MongoProject.model.UserModel;
+import com.example.MongoProject.repository.UserRepository;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -39,7 +39,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserModel user, HttpServletResponse response) {
-        Optional<UserModel> userFromDb = userRepository.findByEmail(user.getEmail());
+        Optional<UserModel> userFromDb = userRepository.findByName(user.getName());
         if (!userFromDb.isPresent()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário não encontrado");
         } else {
